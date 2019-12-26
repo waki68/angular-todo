@@ -1,0 +1,55 @@
+<div class="jumborton" style="padding:45px 0px;background-color: aqua;">
+  <h4 class="text-center">
+    ToDo List
+  </h4>
+  <div class="text-center" style="margin:0px 5px">
+    <input type="checkbox" #firebase (change)="modeChange($event)" /> Firebase
+    Db [by VPN]
+  </div>
+</div>
+
+<div class="input-group">
+  <input type="text" class="form-control" [(ngModel)]="title" />
+  <div
+    class="input-group-addon hover-cursor"
+    (click)="firebase.checked == true ? add() : add_Local()"
+  >
+    <i class="fa fa-plus-circle fa-2x"> </i>
+  </div>
+</div>
+
+<div style="margin:5px 0px">
+  <ul class="list-group">
+    <li
+      class="list-group-item"
+      *ngFor="
+        let item of firebase.checked == true ? todoList_Firebase : todoList
+      "
+    >
+      <span
+        class="hover-cursor"
+        [class.text-success]="item.isChecked"
+        (click)="
+          firebase.checked == true
+            ? switch(item.$key, !item.isChecked)
+            : switchCheckedStatus_Local(item.key)
+        "
+      >
+        <i
+          class="fa fa-lg"
+          [ngClass]="item.isChecked ? 'fa-check-circle-o' : 'fa-circle-thin'"
+        >
+        </i>
+      </span>
+      {{ item.title }}
+      <span
+        class="hover-cursor text-danger pull-right"
+        (click)="
+          firebase.checked == true ? remove(item.$key) : remove_Local(item.key)
+        "
+      >
+        <i class="fa fa-trash-o fa-lg"></i>
+      </span>
+    </li>
+  </ul>
+</div>
