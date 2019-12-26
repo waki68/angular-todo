@@ -9,7 +9,12 @@
 </div>
 
 <div class="input-group">
-  <input type="text" class="form-control" [(ngModel)]="title" />
+  <input
+    type="text"
+    class="form-control"
+    [(ngModel)]="title"
+    placeholder="Enter ToDo"
+  />
   <div
     class="input-group-addon hover-cursor"
     (click)="firebase.checked == true ? add() : add_Local()"
